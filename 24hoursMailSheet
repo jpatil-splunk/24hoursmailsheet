@@ -9,8 +9,8 @@ G='\033[0;32m'
 R='\033[0;31m'
 NC='\033[0m' 
 BL='\033[;34m'
-usr=jpatil
-passwd=Jp@1234crest
+usr=<YOUR_AD_USERNAME>
+passwd=<YOUR_AD_PASSWORD>
 sed -i '/Complete/d' $file
 sed -i '/Cancelled/d' $file
 p=n
