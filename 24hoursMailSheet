@@ -1,0 +1,158 @@
+#!/usr/bin/env bash
+while getopts 'f:h:s:' option; do
+  case "$option" in
+		f) file=$OPTARG
+			;;
+	esac
+done
+G='\033[0;32m'
+R='\033[0;31m'
+NC='\033[0m' 
+BL='\033[;34m'
+usr=jpatil
+passwd=Jp@1234crest
+sed -i '/Complete/d' $file
+sed -i '/Cancelled/d' $file
+p=n
+sed -i.bak 's/"<a href="//g' $file && sed -i.bak 's/"" target=""_blank"">Link to bug: CO-\([0-9]*\)//g' $file && sed -i.bak 's/"" target=""_blank"">Link to bug: co-\([0-9]*\)//g' $file &&sed -i.bak 's/<\/a>//g' $file
+sed -i.bak 's/"<a href="//g' $file && sed -i.bak 's/"" target=""_blank"">Link to bug: CIA-\([0-9]*\)//g' $file && sed -i.bak 's/"" target=""_blank"">Link to bug: cia-\([0-9]*\)//g' $file &&sed -i.bak 's/<\/a>//g' $file
+sed -i.bak 's/"<a href="//g' $file && sed -i.bak 's/"" target=""_blank"">Link to bug: APPCERT-\([0-9]*\)//g' $file && sed -i.bak 's/"" target=""_blank"">Link to bug: appcert-\([0-9]*\)//g' $file &&sed -i.bak 's/<\/a>//g' $file
+sed -i.bak 's/"<a href="//g' $file && sed -i.bak 's/"" target=""_blank"">Link to bug: SPL-\([0-9]*\)//g' $file && sed -i.bak 's/"" target=""_blank"">Link to bug: spl-\([0-9]*\)//g' $file &&sed -i.bak 's/<\/a>//g' $file
+sed -i.bak 's/"<a href="//g' $file && sed -i.bak 's/"" target=""_blank"">Link to bug: SOLNESS-\([0-9]*\)//g' $file && sed -i.bak 's/"" target=""_blank"">Link to bug: solness-\([0-9]*\)//g' $file &&sed -i.bak 's/<\/a>//g' $file
+limit="$(awk '{n+=1} END {print n}' $file)"
+sed -i 's/\r//;s/$/,jpa,/' $file
+sed -i '1s/,jpa,//' $file
+echo -e "${BL}Loading file $file...${NC}"
+for i in $( eval echo {2..$limit} )
+do
+	appcert="$(sed -n ${i}p $file | grep -io "APPCERT-\([0-9]*\)" | awk '!seen[$0]++')"
+	solness="$(sed -n ${i}p $file | grep -io "SOLNESS-\([0-9]*\)" | awk '!seen[$0]++')"
+	cia="$(sed -n ${i}p $file | grep -io "CIA-\([0-9]*\)" | awk '!seen[$0]++')"
+	spl="$(sed -n ${i}p $file | grep -io "SPL-\([0-9]*\)" | awk '!seen[$0]++')"
+	job="$(sed -n ${i}p $file | awk -F',' '{print $2}'| sed 's/"//g')"
+	sed -n ${i}p $file | grep -io "CO-\([0-9]*\)" | awk '!seen[$0]++' > cos.txt
+			#CIA
+			sed -i "${i}s/,\"CIA-\([0-9]*\),/,\"/g" $file
+			sed -i "${i}s/,\"CIA-\([0-9]*\),/,\"/g" $file
+                        sed -i "${i}s/,\CIA-\([0-9]*\)\"/\"/g" $file
+                        sed -i "${i}s/,\CIA-\([0-9]*\),/,/g" $file
+                        #SPL
+			sed -i "${i}s/,\"SPL-\([0-9]*\),/,\"/g" $file
+                        #sed -i "${i}s/\"SPL-\([0-9]*\),/\"/g" $file
+                        sed -i "${i}s/,\SPL-\([0-9]*\)\"/\"/g" $file
+                        sed -i "${i}s/,\SPL-\([0-9]*\),/,/g" $file
+                        #APPCERT
+			sed -i "${i}s/,\"APPCERT-\([0-9]*\),/,\"/g" $file
+                        #sed -i "${i}s/\"APPCERT-\([0-9]*\),/\"/g" $file
+                        sed -i "${i}s/,\APPCERT-\([0-9]*\)\"/\"/g" $file
+                        sed -i "${i}s/,\APPCERT-\([0-9]*\),/,/g" $file
+                        #SOLNESS
+			sed -i "${i}s/,\"SOLNESSS-\([0-9]*\),/,\"/g" $file
+                        #sed -i "${i}s/\"SOLNESSS-\([0-9]*\),/\"/g" $file
+                        sed -i "${i}s/,\SOLNESSS-\([0-9]*\)\"/\"/g" $file
+                        sed -i "${i}s/,\SOLNESSS-\([0-9]*\),/,/g" $file
+			sed -i "${i}s/,\"CIA-\([0-9]*\),/,\"/g" $file
+			sed -i "${i}s/,\"CIA-\([0-9]*\),/,\"/g" $file
+                        #sed -i "${i}s/\"${cia,/\"/g" $file
+                        sed -i "${i}s/,\CIA-\([0-9]*\)\"/\"/g" $file
+                        sed -i "${i}s/,\CIA-\([0-9]*\),/,/g" $file
+                        #SPL
+			sed -i "${i}s/,\"SPL-\([0-9]*\),/,\"/g" $file
+                        #sed -i "${i}s/\"SPL-\([0-9]*\),/\"/g" $file
+                        sed -i "${i}s/,\SPL-\([0-9]*\)\"/\"/g" $file
+                        sed -i "${i}s/,\SPL-\([0-9]*\),/,/g" $file
+                        #APPCERT
+			sed -i "${i}s/,\"APPCERT-\([0-9]*\),/,\"/g" $file
+                        #sed -i "${i}s/\"APPCERT-\([0-9]*\),/\"/g" $file
+                        sed -i "${i}s/,\APPCERT-\([0-9]*\)\"/\"/g" $file
+                        sed -i "${i}s/,\APPCERT-\([0-9]*\),/,/g" $file
+                        #SOLNESS
+			sed -i "${i}s/,\"SOLNESSS-\([0-9]*\),/,\"/g" $file
+                        #sed -i "${i}s/\"SOLNESSS-\([0-9]*\),/\"/g" $file
+                        sed -i "${i}s/,\SOLNESSS-\([0-9]*\)\"/\"/g" $file
+                        sed -i "${i}s/,\SOLNESSS-\([0-9]*\),/,/g" $file
+#COMMENT
+	limit2="$(awk '{n+=1} END {print n}' cos.txt)"
+	if [ "$limit2" -gt 1 ]
+	then
+	function verifyCO()
+	{
+		list1=$1[@]
+		a=("${!list1}")
+		for k in "${a[@]}" ; do
+		curl    -D-    -u $usr:$passwd    -X GET    -H "Content-Type: application/json" https://jira.splunk.com/rest/api/2/issue/$k --silent | grep -Po $job > cocheck.txt
+		cos="$(cat cocheck.txt)"
+		if [ "$cos" = "$job" ]
+		then
+			CO=$k
+			p=$i
+			sed -i "${i}s|http://jira.splunk.com/browse/CO-\([0-9]*\)|=HYPERLINK(\"http://jira.splunk.com/browse/${CO}\";\"${CO}\")|" $file
+			sed -i "${i}s|http://jira.splunk.com/browse/${appcert}|http://jira.splunk.com/browse/${CO}|" $file
+			sed -i "${i}s|http://jira.splunk.com/browse/${spl}|http://jira.splunk.com/browse/${CO}|" $file
+			sed -i "${i}s|http://jira.splunk.com/browse/${cia}|http://jira.splunk.com/browse/${CO}|" $file
+			sed -i "${i}s|http://jira.splunk.com/browse/${solness}|http://jira.splunk.com/browse/${CO}|" $file
+		elif [ "$cos" != "$job" ]
+		then
+			#"CO-\([0-9]*\)"
+                        sed -i "${i}s/,$k,/,/g" $file
+                        sed -i "${i}s/,$k\"/\"/g" $file
+			sed -i "${i}s/,\"$k,/,\"/g" $file
+                        sed -i "${i}s/,$k,/,/g" $file
+                        sed -i "${i}s/,$k\"/\"/g" $file
+			sed -i "${i}s/,\"$k,/,\"/g" $file
+			#sed -i "s///g" $file
+			#'1s/,jpa,//
+			#UnnecessaryJira
+			#sed -i "${i}s/\"$k,/\"/g" $file
+			#sed -i "${i}s/\,$k\"/\"/g" $file
+			#sed -i "${i}s/,\$k,/,/g" $file
+		fi
+		done
+	}
+	input="$(cat cos.txt)"
+	coList=(${input//'\n'/ })
+	verifyCO coList
+	fi
+	CO="$(sed -n ${i}p $file | grep -io "http://jira.splunk.com/browse/CO-\([0-9]*\)" | grep -io "CO-\([0-9]*\)")"
+	sed -i "${i}s|http://jira.splunk.com/browse/CIA-\([0-9]*\)|=HYPERLINK(\"http://jira.splunk.com/browse/${CO}\";\"${CO}\")|" $file
+	sed -i "${i}s|http://jira.splunk.com/browse/SOLNESS-\([0-9]*\)|=HYPERLINK(\"http://jira.splunk.com/browse/${CO}\";\"${CO}\")|" $file
+	sed -i "${i}s|http://jira.splunk.com/browse/APPCERT-\([0-9]*\)|=HYPERLINK(\"http://jira.splunk.com/browse/${CO}\";\"${CO}\")|" $file
+	sed -i "${i}s|http://jira.splunk.com/browse/SPL-\([0-9]*\)|=HYPERLINK(\"http://jira.splunk.com/browse/${CO}\";\"${CO}\")|" $file
+	sed -i "${i}s|http://jira.splunk.com/browse/CO-\([0-9]*\)|=HYPERLINK(\"http://jira.splunk.com/browse/${CO}\";\"${CO}\")|" $file
+	curl    -D-    -u $usr:$passwd    -X GET    -H "Content-Type: application/json" https://jira.splunk.com/rest/api/2/issue/$CO --silent > json.txt
+	label="$(cat json.txt | grep -Po '"labels":.*?[^\\],.*?[^\\]]' | grep -Po "precheck_complete")"
+	stackID="$(cat json.txt | grep -Po '"customfield_13602":.*?[^\\]]' |awk -F':' '{print $2}'| sed 's/\["//g' | sed 's/"\]//g' | sed 's/","/,/g' | sed 's/itsi-//g' | sed 's/es-//g' | awk -F',' '{print $1}' | sed 's/null/(null)/g')"
+	jobVerify="$(cat json.txt | grep -Po $job | awk '!seen[$0]++')"
+	if [ "$jobVerify" = "$job" ]
+	then
+        	:
+	elif [ "$jobVerify" != "$job" ]
+	then
+		sed -i "s/$job/$job (Not found in JIRA)\"/" $file
+	fi
+	if [[ "$label" = "precheck_complete" ]]
+	then
+		sed -i "${i}s/,jpa,/,$stackID,Done,/" $file
+	elif [[ "$label" != "precheck_complete" ]]
+	then
+		sed -i "${i}s/,jpa,/,$stackID,Pending,/" $file
+	fi
+	rm -rf json.txt
+	rm -rf cos.txt
+	rm -rf cocheck.txt
+	#j=i-1;
+	j=`expr $i - 1`
+	if [ "$i" -lt "$limit" ]
+	then
+		echo -ne "${R}$j% is Complete...\r"
+		echo -ne "\n${NC}"
+	elif [ "$i" -eq "$limit" ]
+	then
+		echo -ne "${R}100% Complete!!! Yay!!\r"
+        	echo -ne "\n${NC}"
+	fi
+done
+sed -i.bak 's/"=/=/g' $file
+sed -i.bak 's/)"/)/g' $file
+awk 'NR==1 {$0=$0",Stack,Precheck"}1' $file > testfile.tmp && mv testfile.tmp $file
+echo -e "${G}Unnecessary content has been removed from $file.${NC} \n${R}Now,Export $file in Google Sheets.${NC}"
