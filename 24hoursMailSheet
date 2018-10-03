@@ -155,4 +155,4 @@ done
 sed -i.bak 's/"=/=/g' $file
 sed -i.bak 's/)"/)/g' $file
 awk 'NR==1 {$0=$0",Stack,Precheck"}1' $file > testfile.tmp && mv testfile.tmp $file
-echo -e "${G}Unnecessary content has been removed from $file.${NC} \n${R}Now,Export $file in Google Sheets.${NC}"
+echo -e "${G}Unnecessary content has been removed from $file.${NC} \n${R}Now,Import $file in Google Sheets.${NC}"
